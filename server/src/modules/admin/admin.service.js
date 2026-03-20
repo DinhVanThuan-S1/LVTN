@@ -183,7 +183,11 @@ class AdminService {
     }
 
     const [courses, total] = await Promise.all([
-      Course.find(filter).skip(skip).limit(limit).sort({ courseCode: 1 }),
+      Course.find(filter)
+        .populate('contributedSkills.skillId', 'name category')
+        .populate('prerequisiteCourses', 'courseCode name')
+        .populate('corequisiteCourses', 'courseCode name')
+        .skip(skip).limit(limit).sort({ courseCode: 1 }),
       Course.countDocuments(filter),
     ]);
 
@@ -193,7 +197,8 @@ class AdminService {
   static async getCourseById(id) {
     const course = await Course.findById(id)
       .populate('contributedSkills.skillId', 'name category')
-      .populate('prerequisiteCourses', 'courseCode name');
+      .populate('prerequisiteCourses', 'courseCode name')
+      .populate('corequisiteCourses', 'courseCode name');
     if (!course) throw ApiError.notFound('Không tìm thấy học phần');
     return course;
   }
