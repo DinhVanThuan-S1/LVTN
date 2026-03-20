@@ -27,6 +27,7 @@ const getMenuItems = (role) => {
     { key: '/my-roadmaps', icon: <ReadOutlined />, label: 'Lộ trình của tôi' },
     { key: '/skill-map', icon: <BulbOutlined />, label: 'Bản đồ kỹ năng' },
     { key: '/academic', icon: <BookOutlined />, label: 'Hồ sơ học tập' },
+    { key: '/career-preferences', icon: <AimOutlined />, label: 'Sở thích nghề' },
     { key: '/jobs', icon: <SearchOutlined />, label: 'Tìm việc làm' },
     { key: '/my-applications', icon: <FileTextOutlined />, label: 'Đơn ứng tuyển' },
     { key: '/my-cvs', icon: <SolutionOutlined />, label: 'Quản lý CV' },

@@ -1,12 +1,13 @@
 /**
  * App Router — React Router v7
- * ✅ HOÀN CHỈNH 100% — Tất cả 31 routes
+ * ✅ 100% HOÀN CHỈNH — Landing Page + 35 protected routes
  */
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import DashboardLayout from '../components/layout/DashboardLayout';
 import ProtectedRoute from '../components/common/ProtectedRoute';
 
-// Auth
+// Auth & Public
+import LandingPage from '../pages/LandingPage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 import DashboardPage from '../pages/DashboardPage';
@@ -24,6 +25,7 @@ import JobDetailPage from '../features/jobs/JobDetailPage';
 import MyApplicationsPage from '../features/jobs/MyApplicationsPage';
 import RecruiterMyJobsPage from '../features/jobs/RecruiterMyJobsPage';
 import RecruiterJobFormPage from '../features/jobs/RecruiterJobFormPage';
+import RecruiterApplicantsPage from '../features/jobs/RecruiterApplicantsPage';
 
 // Profile
 import ProfilePage from '../features/profile/ProfilePage';
@@ -31,8 +33,10 @@ import CVManagerPage from '../features/profile/CVManagerPage';
 import CompanyProfilePage from '../features/profile/CompanyProfilePage';
 import FavoritesPage from '../features/profile/FavoritesPage';
 
-// Academic
+// Academic & Career
 import AcademicProfilePage from '../features/academic/AcademicProfilePage';
+import SkillMapPage from '../features/academic/SkillMapPage';
+import CareerPreferencePage from '../features/career/CareerPreferencePage';
 
 // Chat & Notification
 import ChatPage from '../features/chat/ChatPage';
@@ -48,18 +52,18 @@ import AdminCoursesPage from '../features/admin/AdminCoursesPage';
 import AdminCareersPage from '../features/admin/AdminCareersPage';
 import AdminRoadmapsPage from '../features/admin/AdminRoadmapsPage';
 import AdminJobApprovalPage from '../features/admin/AdminJobApprovalPage';
+import AdminAnalyticsPage from '../features/admin/AdminAnalyticsPage';
 
 const router = createBrowserRouter([
   // ===== PUBLIC =====
+  { path: '/', element: <LandingPage /> },
   { path: '/login', element: <LoginPage /> },
   { path: '/register', element: <RegisterPage /> },
 
-  // ===== PROTECTED =====
+  // ===== PROTECTED (Dashboard Layout) =====
   {
-    path: '/',
     element: <ProtectedRoute><DashboardLayout /></ProtectedRoute>,
     children: [
-      { index: true, element: <Navigate to="/dashboard" replace /> },
       { path: 'dashboard', element: <DashboardPage /> },
       { path: 'profile', element: <ProfilePage /> },
       { path: 'settings', element: <SettingsPage /> },
@@ -69,8 +73,9 @@ const router = createBrowserRouter([
       { path: 'roadmaps/:id', element: <RoadmapDetailPage /> },
       { path: 'my-roadmaps', element: <MyRoadmapsPage /> },
       { path: 'my-roadmaps/:id', element: <RoadmapProgressPage /> },
-      { path: 'skill-map', element: <div style={{ padding: 24, textAlign: 'center', fontSize: 16 }}>🗺️ Bản đồ kỹ năng — Đang phát triển</div> },
+      { path: 'skill-map', element: <SkillMapPage /> },
       { path: 'academic', element: <AcademicProfilePage /> },
+      { path: 'career-preferences', element: <CareerPreferencePage /> },
 
       // Student — Jobs
       { path: 'jobs', element: <JobSearchPage /> },
@@ -84,7 +89,7 @@ const router = createBrowserRouter([
       { path: 'my-jobs', element: <RecruiterMyJobsPage /> },
       { path: 'my-jobs/create', element: <RecruiterJobFormPage /> },
       { path: 'my-jobs/:id/edit', element: <RecruiterJobFormPage /> },
-      { path: 'applicants', element: <div style={{ padding: 24 }}>Ứng viên — Đang phát triển</div> },
+      { path: 'applicants', element: <RecruiterApplicantsPage /> },
 
       // Admin
       { path: 'admin/users', element: <AdminUsersPage /> },
@@ -93,7 +98,7 @@ const router = createBrowserRouter([
       { path: 'admin/careers', element: <AdminCareersPage /> },
       { path: 'admin/roadmaps', element: <AdminRoadmapsPage /> },
       { path: 'admin/jobs', element: <AdminJobApprovalPage /> },
-      { path: 'admin/analytics', element: <div style={{ padding: 24 }}>📊 Thống kê — Đang phát triển</div> },
+      { path: 'admin/analytics', element: <AdminAnalyticsPage /> },
 
       // Common
       { path: 'chat', element: <ChatPage /> },
